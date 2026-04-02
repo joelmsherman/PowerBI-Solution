@@ -1,0 +1,13 @@
+# Power BI cache
+.pbi/cache.abf
+.pbi/localSettings.json
+
+# Binary PBIX files (use PBIP format instead)
+*.pbix
+
+# BPA downloaded tools
+_tools/
+
+# OS files
+.DS_Store
+Thumbs.db
