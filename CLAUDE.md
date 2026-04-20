@@ -11,6 +11,10 @@ src/
   {{ProjectName}}.pbip                    # Project manifest
   {{ProjectName}}.Report/                 # PBIR report definition
     definition.pbir
+    StaticResources/
+      RegisteredResources/
+        Light.json                        # Default custom theme (PowerUI)
+        Dark.json                         # Alternate custom theme (PowerUI)
   {{ProjectName}}.SemanticModel/          # TMDL semantic model
     definition.pbism
     definition/
@@ -56,6 +60,13 @@ docs/
 - Property order: declaration, documentation (///), properties (type, isKey, isHidden, formatString), source/partition last
 - One table per `.tmdl` file in `/definition/tables/`
 
+### Themes
+- Two PowerUI-authored custom themes ship with the project: `Light.json` (default) and `Dark.json`, at `<ProjectName>.Report/StaticResources/RegisteredResources/`
+- **When creating `definition/report.json` for the first time**, register both themes in `resourcePackages` (entries of `type: CustomTheme` under a `RegisteredResources` package) and set `themeCollection.customTheme` to `{ "name": "Light.json", "type": "RegisteredResources" }`. Preserve the `SharedResources` entry — do not overwrite it
+- Do **not** author a new custom theme or invoke the `/modifying-theme-json` skill to generate one unless the user explicitly asks for a theme distinct from Light/Dark
+- To swap themes, update only `themeCollection.customTheme.name` in `definition/report.json` to `Light.json` or `Dark.json` — do not regenerate the theme
+- To tweak a theme, edit `Light.json` or `Dark.json` in place
+
 ## Quality Assurance
 
 Run BPA before deployment:
@@ -87,6 +98,7 @@ The following plugin skills are available for deeper guidance on specific topics
 
 - **Adding a table**: create TMDL in `definition/tables/`, add `ref table` in `model.tmdl`, add relationships in `relationships.tmdl`
 - **Adding measures**: define in the source fact table TMDL file with `///` documentation
-- **Adding a report page**: use Power BI Desktop (Developer Mode) or `/pbir-format` skill
+- **Adding a report page**: use Power BI Desktop (Developer Mode) or `/pbir-format` skill; when creating `definition/report.json` for the first time, register `Light.json` and `Dark.json` per the Themes convention above
+- **Switching theme**: update `themeCollection.customTheme.name` in `definition/report.json` to `Light.json` or `Dark.json`
 - **Reviewing model**: use `/review-semantic-model` skill
 - **Deploying**: use `/fabric-cli` skill for workspace and deployment pipeline operations

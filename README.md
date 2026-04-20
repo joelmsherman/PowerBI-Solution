@@ -128,6 +128,10 @@ src/
   {{ProjectName}}.pbip         # Project manifest
   {{ProjectName}}.Report/
     definition.pbir            # Report definition (byPath ref to semantic model)
+    StaticResources/
+      RegisteredResources/
+        Light.json             # Default light theme (PowerUI-generated)
+        Dark.json              # Alternate dark theme (PowerUI-generated)
   {{ProjectName}}.SemanticModel/
     definition.pbism           # Semantic model properties
     definition/
@@ -144,3 +148,16 @@ src/
 docs/
   requirements.md              # Business requirements template
 ```
+
+## Themes
+
+Two custom report themes ship with the template, authored in [PowerUI](https://powerui.com/):
+
+- `Light.json` — default
+- `Dark.json` — alternate
+
+Both live under `src/{{ProjectName}}.Report/StaticResources/RegisteredResources/` — the canonical PBIR location for user-authored themes. The folder survives the `setup.sh` rename cascade, so no extra wiring is required at init time.
+
+When Claude first builds the report definition (e.g. when you ask it to add the first page), it will register both themes in `resourcePackages` inside `definition/report.json` and set `Light.json` as the active theme via `themeCollection.customTheme`. This behavior is enforced by convention in `CLAUDE.md`, so Claude will not author a new theme from scratch unless you explicitly ask for one.
+
+To switch themes, ask Claude to switch to Dark (or Light), or edit `themeCollection.customTheme.name` in `definition/report.json` directly. To tweak an existing theme, edit `Light.json` or `Dark.json` in place — do not generate a new theme file unless you're intentionally deviating from the shipped pair.
