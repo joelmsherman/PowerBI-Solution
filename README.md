@@ -88,31 +88,52 @@ Then open `src/<ProjectName>.pbip` in Power BI Desktop (Developer Mode) to previ
 
 ## Workflow
 
-1. **Document requirements** in `docs/requirements.md` — data sources, key metrics, stakeholders, and refresh schedule.
+1. **Conduct Intake/Discovery** meeting with clients
+- See `/docs/intake/intake-questions.md` for suggested items to review with client
+- Record meeting and place transcription at `/docs/intake/intake-meeting.md`
+- Using example source data files provided during or after intake, create schema files that conform to `/docs/data/source-template.md`
+- Formulate a discovery brief:
+```bash
+/discovery-brief
+```
 
-2. **Develop mockups** in `docs/` - See [this repo](https://github.com/joelmsherman/Product-Planning-Design) for more information.
+2. **Create the Product foundation**
+```bash
+/product-plan
+```
 
-3. **Build the semantic model** — ask Claude to do things like:
+3. **Develop Report Page Specs and Mockups** for each report page
+- Create the spec:
+```bash
+/page-spec
+```
+- Provide the page spec along with the product plan docs to Claude Design (or another tool) and ask for a mockup
+- Add the mockup to `docs/product/pages/[page-title]-mock.png`
+
+4. **OPTIONAL: Create a detailed Product Plan document** for the client to review before proceeding
+- Provide Claude with all materials in `docs/product` and ask for a comprehensive product plan document
+
+5. **Build the semantic model** — ask Claude to review `/docs/product/data-model.md` and `/docs/data/` and do things like:
 - Add dimension and fact tables from your data sources (uses `/tmdl` skill)
 - Create relationships between tables (uses `/pbip` skill)
 - Write measures and KPIs with DAX (uses `/tmdl` skill)
 - Review model quality, performance, and AI-readiness (uses `/review-semantic-model` skill)
 - Standardize naming conventions across the model (uses `/standardize-naming-conventions` skill)
 
-4. **Build the report** — ask Claude to do things like:
+6. **Build the report** — ask Claude to review `/docs/product/` and do things like:
 - Design report pages with visuals, layout, and formatting (uses `/pbi-report-design` skill)
 - Create or modify report themes (uses `/modifying-theme-json` skill)
 - Add advanced visuals with Deneb/Vega-Lite, Python, R, or SVG (uses dedicated visual skills)
 - Review report quality and usage (uses `/review-report` skill)
 
-5. **Validate the report** - Run the Best Practices Analyzer against the semantic model and report layers:
+7. **Validate the product** - Run the Best Practices Analyzer against the semantic model and report layers:
 - You can create or customize BPA rules by asking Claude (uses `/bpa-rules` skill)
 - First run downloads Tabular Editor and PBI Inspector portables, then validates the semantic model and report against the configured rule sets.
 ```bash
 pwsh src/.bpa/bpa.ps1 -src "src"
 ```
 
-6. **Deploy to Power BI Service** 
+8. **Deploy to Power BI Service** 
 - Authenticate first
 ```bash
 fab auth login 
@@ -123,6 +144,11 @@ fab auth login
 
 ```
 .claude/
+  commands/                    # Claude slash commands
+    discovery-brief.md
+    page-inventory.md
+    page-spec.md
+    product-plan.md                
   settings.json               # Claude Code marketplace + plugin configuration
 src/
   {{ProjectName}}.pbip         # Project manifest
@@ -146,7 +172,13 @@ src/
     bpa-rules-semanticmodel.json
     bpa-rules-report.json
 docs/
-  requirements.md              # Business requirements template
+  data/                        # Source data file schemas
+  intake/                      # Discovery materials
+  product/                     # Product plan materials
+    pages/                     # [page-title]-spec.md and [page-title]-mock.png
+    data-model.md
+    page-inventory.md
+    product-overview.md    
 ```
 
 ## Themes
