@@ -140,6 +140,8 @@ fab auth login
 ```
 - Ask Claude to deploy to a certain workspace for which you are a member
 
+9. When finished, ask Claude to overwrite this README.md file with a proper README.md that fully documents and describes your product.
+
 ## Folder Structure
 
 ```
