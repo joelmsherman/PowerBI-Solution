@@ -91,7 +91,8 @@ Then open `src/<ProjectName>.pbip` in Power BI Desktop (Developer Mode) to previ
 1. **Conduct Intake/Discovery** meeting with clients
 - See `/docs/intake/intake-questions.md` for suggested items to review with client
 - Record meeting and place transcription at `/docs/intake/intake-meeting.md`
-- Using example source data files provided during or after intake, create schema files that conform to `/docs/data/source-template.md`
+- Gather and place sample source data files at `/docs/data/` as .csv
+- Provide a source metadata file at `/docs/data/source-metadata.md` by following the `metadata-template.md` template
 - Formulate a discovery brief:
 ```bash
 /discovery-brief

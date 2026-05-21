@@ -26,7 +26,8 @@ Read, in order:
 
 1. `/docs/intake/intake-meeting.md` — the raw transcript
 2. `/docs/intake/intake-questions.md` — the question bank (use its section structure to frame your synthesis)
-3. Every `.csv` file under `/docs/data/` — source schemas to cross-reference against metrics and dimensions mentioned in the transcript
+3. `/docs/data/source-metadata.md` - the meta data for source data files 
+4. Every `.csv` file under `/docs/data/` — sample data files referenced by `source-metadata.md`
 
 Do **not** read anything under `/docs/product/` — the brief precedes product planning and should not be biased by downstream artifacts.
 
@@ -43,7 +44,7 @@ Scan the transcript against the sections of the brief template (below). The crit
 
 If a critical category is materially thin — not just imperfect, but missing enough that `/product-plan` would stall — use the `AskUserQuestion` tool to fill the gap. Cap follow-ups at **3 questions total**. If more than three categories are empty, the user should go back to the client rather than guess here.
 
-If the metrics discussed in the transcript reference data that isn't reflected in any `/docs/data/*.csv` schema, do **not** block — note the mismatch explicitly in the `Open Questions` section of the brief.
+If the metrics discussed in the transcript reference data that isn't reflected in any `/docs/data/*.csv` or `/docs/data/source-metadata.md`, do **not** block — note the mismatch explicitly in the `Open Questions` section of the brief.
 
 ## Step 4: Auto-Proceed — Write Brief
 
@@ -81,7 +82,7 @@ Once you have enough material, **immediately proceed** without asking for approv
 - **[Journey]** — [Who, what they need to do, what decision follows]
 
 ## Data Sources
-[Cross-reference with `/docs/data/*.csv` schemas. Note grain, time horizon, owner, and refresh cadence where known.]
+[Cross-reference with `/docs/data/*.csv` and `/docs/data/source-metadata.md`. Note grain, time horizon, owner, and refresh cadence where known.]
 - **[Source name]** — [Grain, time horizon, owner, refresh cadence]
 - **[Source name]** — [...]
 
@@ -97,7 +98,7 @@ Once you have enough material, **immediately proceed** without asking for approv
 
 **Important:**
 - Synthesize — don't transcribe. If the client spent 10 minutes describing one pain point, a one-sentence problem statement plus context is enough.
-- Don't invent stakeholders, metrics, or data sources that aren't in the transcript or the `/docs/data/` schemas.
+- Don't invent stakeholders, metrics, or data sources that aren't in the transcript or the `/docs/data/`.
 - Omit sections that genuinely have no content rather than filling with placeholder text — but move those items into `Open Questions` so they aren't lost.
 
 ## Step 5: Inform the User

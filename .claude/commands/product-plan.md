@@ -43,11 +43,11 @@ Identify the separate pages of the Power BI report and their function:
 
 ### Data Model Questions
 
-First, check whether [source].csv source data file schemas exist at `/docs/data/`. If there are none:
+First, check whether [source].csv source data sample files and a `source-metadata.md` file exist at `/docs/data/`. If these are not present:
 
-"I don't see any source data information yet. Please place info about your data sources in `/docs/data/`. Make sure they are csv files named like `[source].csv` and follow the template at `docs/data/source-template.md`"
+"I don't see any source data information yet. Please place sample data files and information about those files in `/docs/data/`. Make sure sample data files are csv files named like `[source].csv` and the metadata markdown file follows the template at `docs/data/metadata-template.md`"
 
-Stop here if no source data file schemas exist.
+**Stop here if these files do not exist.**
 
 Second, Identify the facts and dimensions of the data model, and roughly how they relate:
 
@@ -136,6 +136,9 @@ Create `/docs/product/data-model.md` with this format:
 - [Dimension1] has many [Fact1]
 - [Dimension2] has many [Fact1]
 [Add more relationships as needed]
+
+## Key Measures
+[List the key DAX measures needed to achieve the product objectives]
 ```
 
 The ideal Power BI semantic model is a star-schema with single-direction, one-to-many relationships between dimensions and facts. All entities in import-mode.
